@@ -15,8 +15,20 @@ static async Task MigrateDatabaseAsync(IServiceProvider services)
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
     await db.Database.MigrateAsync();
-    await db.Database.ExecuteSqlRawAsync("UPDATE utilisateurs SET date_creation = UTC_TIMESTAMP() WHERE date_creation = '0000-00-00 00:00:00';");
-    await db.Database.ExecuteSqlRawAsync("UPDATE utilisateurs SET date_validation = date_creation WHERE date_validation = '0000-00-00 00:00:00';");
+
+    // One-off repair for rows created by a long-fixed bug that left invalid zero dates in older
+    // databases. A server running in strict SQL mode (the default on managed hosts like Aiven)
+    // rejects the zero-date literal outright before it can even check whether any row matches, so
+    // this is wrapped defensively — it's a no-op on any database that never had the bug.
+    try
+    {
+        await db.Database.ExecuteSqlRawAsync("UPDATE utilisateurs SET date_creation = UTC_TIMESTAMP() WHERE date_creation = '0000-00-00 00:00:00';");
+        await db.Database.ExecuteSqlRawAsync("UPDATE utilisateurs SET date_validation = date_creation WHERE date_validation = '0000-00-00 00:00:00';");
+    }
+    catch (MySqlConnector.MySqlException)
+    {
+        // Strict sql_mode rejected the zero-date literal — nothing to clean up on this database.
+    }
 }
 
 // Seeds/keeps in sync a bootstrap admin account from configuration (DevelopmentAdmin:Email/Password).
