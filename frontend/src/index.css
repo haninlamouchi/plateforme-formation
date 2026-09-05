@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #C62828;
+    --color-primary-hover: #A81E1E;
+    --color-accent: #A67C1B;
+    --color-success: #1E8E5A;
+    --color-neutral: #E2E8F0;
+    --color-surface-0: #F1F5F9;
+    --color-surface-1: #FFFFFF;
+    --color-surface-2: #F8FAFC;
+    --color-surface-3: #E2E8F0;
+    --color-ink: #1E1E1E;
+    --color-ink-muted: #6B7280;
+    --color-border: #CBD5E1;
+    --color-border-subtle: #E2E8F0;
+    --sidebar-width: 260px;
+
+    /* ── Sidebar — white, matches brand ── */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-border: #E2E8F0;
+    --sidebar-ink: #1E1E1E;
+    --sidebar-ink-muted: #6B7280;
+    --sidebar-hover-bg: #F8FAFC;
+    --sidebar-active-bg: rgba(198,40,40,0.08);
+    --sidebar-active-ink: #C62828;
+    --sidebar-footer-bg: #F8FAFC;
+    --sidebar-label: #6B7280;
+    --sidebar-divider: #E2E8F0;
+
+    /* Typography */
+    --font-display: 'Geist', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-body: 'Inter', 'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Geist Mono', 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  [data-theme="dark"] {
+    --color-primary: #E53935;
+    --color-primary-hover: #EF5350;
+    --color-accent: #D4A843;
+    --color-success: #34D399;
+    --color-neutral: #0F172A;
+    --color-surface-0: #0B1120;
+    --color-surface-1: #111827;
+    --color-surface-2: #1E293B;
+    --color-surface-3: #334155;
+    --color-ink: #F1F5F9;
+    --color-ink-muted: #94A3B8;
+    --color-border: #1E293B;
+    --color-border-subtle: #1E293B;
+
+    /* Sidebar matches dark theme surface */
+    --sidebar-bg: var(--color-surface-1);
+    --sidebar-border: var(--color-border);
+    --sidebar-ink: var(--color-ink);
+    --sidebar-ink-muted: var(--color-ink-muted);
+    --sidebar-hover-bg: var(--color-surface-2);
+    --sidebar-active-bg: rgba(217,58,74,0.10);
+    --sidebar-active-ink: var(--color-primary);
+    --sidebar-footer-bg: var(--color-surface-2);
+    --sidebar-label: var(--color-ink-muted);
+    --sidebar-divider: var(--color-border-subtle);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-ink);
+    background-color: var(--color-surface-0);
+    /* Subtle neutral dot grid — clean, professional */
+    background-image: radial-gradient(circle, rgba(15,23,42,0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [data-theme="dark"] body {
+    background-image:
+      radial-gradient(ellipse 90% 55% at 0% 0%, rgba(155,17,30,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 100% 100%, rgba(155,17,30,0.06) 0%, transparent 55%);
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  ::selection {
+    background: rgba(155, 17, 30, 0.15);
+  }
+
+  [data-theme="dark"] ::selection {
+    background: rgba(220, 38, 38, 0.3);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Hero banner shimmer — shared by HeroBanner and UserLayout ── */
+@keyframes heroShimmer {
+  0%   { transform: translateX(-20%) rotate(0deg); }
+  100% { transform: translateX(20%) rotate(2deg); }
+}
+
+.hero-shimmer {
+  animation: heroShimmer 8s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-shimmer { animation: none; }
+}

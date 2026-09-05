@@ -1,0 +1,93 @@
+/* Power BI–style report theme, scoped to the admin Dashboard + Analytics pages via `.bi-scope`.
+   Independent of the app's global --color-* tokens (used everywhere else) — a Fluent-style gray
+   canvas holding sharp-cornered "visual" cards is what actually reads as a BI report, not just a
+   color swap. Values are lifted from the real Power BI Desktop default theme (canvas #F3F2F1 /
+   dark #1F1F1F, Segoe UI, depth-4 card shadow) so the resemblance holds up, not just gestures at it. */
+
+.bi-scope {
+  --bi-canvas: #F3F2F1;
+  --bi-visual-bg: #FFFFFF;
+  --bi-visual-border: #E1E1E1;
+  --bi-text: #201F1E;
+  --bi-text-muted: #605E5C;
+  --bi-grid-line: #E8E8E6;
+  --bi-shadow: 0 1.6px 3.6px rgba(0,0,0,0.132), 0 0.3px 0.9px rgba(0,0,0,0.108);
+  --bi-radius: 4px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+[data-theme="dark"] .bi-scope {
+  --bi-canvas: #1F1F1F;
+  --bi-visual-bg: #252423;
+  --bi-visual-border: #3B3A39;
+  --bi-text: #F3F2F1;
+  --bi-text-muted: #C8C6C4;
+  --bi-grid-line: #3B3A39;
+  --bi-shadow: 0 1.6px 3.6px rgba(0,0,0,0.5), 0 0.3px 0.9px rgba(0,0,0,0.4);
+}
+
+.bi-canvas {
+  background: var(--bi-canvas);
+  border: 1px solid var(--bi-visual-border);
+  border-radius: 6px;
+}
+
+/* "Visual" container — the report-canvas equivalent of a card */
+.bi-visual {
+  background: var(--bi-visual-bg);
+  border: 1px solid var(--bi-visual-border);
+  border-radius: var(--bi-radius);
+  box-shadow: var(--bi-shadow);
+}
+
+.bi-visual__header {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--bi-grid-line);
+}
+
+.bi-visual__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bi-text);
+  letter-spacing: 0;
+}
+
+.bi-visual__body {
+  padding: 14px;
+}
+
+/* KPI "Card" visual */
+.bi-kpi {
+  position: relative;
+  background: var(--bi-visual-bg);
+  border: 1px solid var(--bi-visual-border);
+  border-radius: var(--bi-radius);
+  box-shadow: var(--bi-shadow);
+  padding: 14px 16px 16px;
+  overflow: hidden;
+}
+
+.bi-kpi__accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.bi-kpi__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bi-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bi-kpi__value {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--bi-text);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}

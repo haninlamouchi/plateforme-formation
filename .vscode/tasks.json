@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Mailpit: Start local inbox",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "-f", "docker-compose.mailpit.yml", "up", "-d"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Mailpit: Stop local inbox",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "-f", "docker-compose.mailpit.yml", "down"],
+      "problemMatcher": []
+    }
+  ]
+}

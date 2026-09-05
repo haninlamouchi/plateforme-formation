@@ -1,0 +1,28 @@
+# API secrets
+PlateformeFormation.Api/appsettings.Development.json
+
+# User-uploaded documents (local test data, not part of the source)
+PlateformeFormation.Api/wwwroot/uploads/*
+!PlateformeFormation.Api/wwwroot/uploads/.gitkeep
+
+# .NET
+**/bin/
+**/obj/
+*.user
+.vs/
+
+# Node
+**/node_modules/
+frontend/dist/
+
+# Env
+.env
+.env.local
+
+# Contains a live API key — never commit
+litellm_config.yaml
+
+# Claude Code tooling config, not part of the app
+.claude/
+.agents/
+skills-lock.json

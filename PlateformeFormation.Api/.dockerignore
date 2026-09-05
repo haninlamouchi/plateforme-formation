@@ -1,0 +1,4 @@
+bin/
+obj/
+wwwroot/uploads/
+appsettings.Development.json

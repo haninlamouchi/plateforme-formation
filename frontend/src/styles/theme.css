@@ -1,0 +1,180 @@
+:root {
+  /* ── Academic Precision Palette ── */
+  --surface: #eceef3;
+  --surface-dim: #d4d7de;
+  --surface-bright: #f4f5f8;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f4f5f8;
+  --surface-container: #eceef3;
+  --surface-container-high: #e2e4ea;
+  --surface-container-highest: #d8dbe3;
+  --on-surface: #191c1e;
+  --on-surface-variant: #5b403d;
+  --inverse-surface: #2e3132;
+  --inverse-on-surface: #f0f1f3;
+  --outline: #8f706c;
+  --outline-variant: #e4beba;
+  --surface-tint: var(--color-primary);
+  --primary: var(--color-primary);
+  --on-primary: #ffffff;
+  --primary-container: #c62828;
+  --on-primary-container: #ffe0dd;
+  --inverse-primary: #ffb4ac;
+  --secondary: #5f5e5e;
+  --on-secondary: #ffffff;
+  --secondary-container: #e2dfde;
+  --on-secondary-container: #636262;
+  --tertiary: #49505d;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #616876;
+  --on-tertiary-container: #e1e8f8;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --background: #f8f9fb;
+  --on-background: #191c1e;
+  --surface-variant: #e1e2e4;
+
+  /* Semantic aliases */
+  --ink: var(--color-ink);
+  --paper: var(--color-surface-0);
+  --paper-raised: var(--color-surface-1);
+  --rule: var(--color-border);
+  --rule-strong: var(--color-surface-3);
+  --slate: var(--color-ink-muted);
+  --slate-light: var(--color-border);
+
+  /* Success (muted, not competing with red) */
+  --success: #2e7d53;
+  --success-container: #d5e8d4;
+  --on-success: #1a4d2e;
+
+  /* Warning (muted amber) */
+  --warning: #8a6d2a;
+  --warning-container: #f5e6b8;
+
+  /* ── Typography ── */
+  --font-display: 'Geist', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Geist', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* ── Spacing (8pt geometric) ── */
+  --space-base: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-gutter: 24px;
+  --container-max: 1280px;
+
+  /* ── Radii ── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Legacy aliases for existing CSS */
+  --radius-4: 0.25rem;
+  --radius-8: 0.5rem;
+  --radius-12: 0.75rem;
+  --radius-16: 1rem;
+  --radius-20: 1.25rem;
+  --radius-24: 1.5rem;
+
+  /* ── Elevation — clean neutral shadows for professional look ── */
+  --shadow-1: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.06);
+  --shadow-2: 0 4px 24px rgba(15, 23, 42, 0.10), 0 20px 48px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 16px rgba(15, 23, 42, 0.06);
+
+  /* ── Glass ── */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-blur: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   DARK MODE
+   ═══════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  /* ── Surfaces — deep navy layering ── */
+  --surface: #0d1117;
+  --surface-dim: #080c12;
+  --surface-bright: #1c2333;
+  --surface-container-lowest: #060a10;
+  --surface-container-low: #111827;
+  --surface-container: #161d2e;
+  --surface-container-high: #1e2740;
+  --surface-container-highest: #263050;
+
+  /* ── Text — crisp on navy ── */
+  --on-surface: #eef1f7;
+  --on-surface-variant: #9aa3b8;
+  --inverse-surface: #e8ecf4;
+  --inverse-on-surface: #0d1117;
+
+  /* ── Borders — visible against navy ── */
+  --outline: #6b7a9a;
+  --outline-variant: #243050;
+
+  /* ── Primary — brand crimson, luminosity-adjusted (inherits from index.css) ── */
+  --surface-tint: var(--color-primary);
+  --primary: var(--color-primary);
+  --on-primary: #ffffff;
+  --primary-container: #c0392b;
+  --on-primary-container: #ffe0dd;
+  --inverse-primary: #ff6b7a;
+
+  /* ── Secondary — cool blue-gray ── */
+  --secondary: #a0aec0;
+  --on-secondary: #1a2332;
+  --secondary-container: #243050;
+  --on-secondary-container: #d0d8e8;
+
+  /* ── Tertiary — soft blue ── */
+  --tertiary: #90b0e0;
+  --on-tertiary: #0e1a30;
+  --tertiary-container: #2a3a5c;
+  --on-tertiary-container: #d0dff8;
+
+  /* ── Error ── */
+  --error: #ff7b73;
+  --on-error: #3b0004;
+  --error-container: #6e1515;
+  --on-error-container: #ffdad6;
+
+  /* ── Background ── */
+  --background: #0d1117;
+  --on-background: #eef1f7;
+  --surface-variant: #243050;
+
+  /* ── Semantic aliases — bridged to index.css --color-* tokens ── */
+  --ink: var(--color-ink);
+  --paper: var(--surface);
+  --paper-raised: var(--surface-container);
+  --rule: var(--outline-variant);
+  --rule-strong: var(--surface-container-highest);
+  --slate: var(--color-ink-muted);
+  --slate-light: var(--outline);
+
+  /* ── Success ── */
+  --success: #5cd89a;
+  --success-container: #142e20;
+  --on-success: #a8f0cc;
+
+  /* ── Warning ── */
+  --warning: #f0c050;
+  --warning-container: #302a10;
+
+  /* ── Elevation ── */
+  --shadow-1: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  /* ── Glass — reduced opacity so blobs show through and glassmorphism works ── */
+  --glass-bg: rgba(13, 17, 23, 0.6);
+  --glass-blur: 12px;
+}
