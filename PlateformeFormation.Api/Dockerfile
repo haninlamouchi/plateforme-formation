@@ -11,6 +11,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 COPY --from=build /app .
 
+# .dockerignore excludes local test uploads, but ASP.NET Core needs wwwroot to exist to serve
+# static files at all — the app creates the documents/avatars/exports subfolders itself at runtime.
+RUN mkdir -p wwwroot/uploads
+
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
