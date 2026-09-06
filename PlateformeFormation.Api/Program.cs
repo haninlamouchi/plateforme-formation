@@ -149,17 +149,20 @@ builder.Services.AddRateLimiter(options =>
 // Services
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<TokenService>();
-// SMTP for local dev (Mailpit), Resend's HTTP API in production — most hosts (Render included)
-// block outbound SMTP on free tiers, so raw SMTP is a dead end there. Picked per-request based on
-// which config is present, so no environment-specific wiring is needed at startup.
+// SMTP for local dev (Mailpit), Brevo's or Resend's HTTP API in production — most hosts (Render
+// included) block outbound SMTP on free tiers, so raw SMTP is a dead end there. Brevo only needs a
+// verified sender address (not a whole domain) to reach any recipient, unlike Resend's sandbox mode
+// which is restricted to the account owner's own inbox without a verified domain. Picked per-request
+// based on which config is present, so no environment-specific wiring is needed at startup.
 builder.Services.AddHttpClient<ResendEmailService>();
+builder.Services.AddHttpClient<BrevoEmailService>();
 builder.Services.AddScoped<SmtpEmailService>();
 builder.Services.AddScoped<IEmailService>(sp =>
 {
     var config = sp.GetRequiredService<IConfiguration>();
-    return string.IsNullOrWhiteSpace(config["Resend:ApiKey"])
-        ? sp.GetRequiredService<SmtpEmailService>()
-        : sp.GetRequiredService<ResendEmailService>();
+    if (!string.IsNullOrWhiteSpace(config["Brevo:ApiKey"])) return sp.GetRequiredService<BrevoEmailService>();
+    if (!string.IsNullOrWhiteSpace(config["Resend:ApiKey"])) return sp.GetRequiredService<ResendEmailService>();
+    return sp.GetRequiredService<SmtpEmailService>();
 });
 builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IAiSuggestionService, AiSuggestionService>();
