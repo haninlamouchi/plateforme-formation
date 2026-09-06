@@ -72,6 +72,8 @@ static async Task EnsureBootstrapAdminAsync(IServiceProvider services)
     await db.SaveChangesAsync();
 }
 
+PdfSharpCore.Fonts.GlobalFontSettings.FontResolver = new PlateformeFormation.Api.Helpers.AppFontResolver();
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
