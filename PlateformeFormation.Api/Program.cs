@@ -149,7 +149,18 @@ builder.Services.AddRateLimiter(options =>
 // Services
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<IEmailService, SmtpEmailService>();
+// SMTP for local dev (Mailpit), Resend's HTTP API in production — most hosts (Render included)
+// block outbound SMTP on free tiers, so raw SMTP is a dead end there. Picked per-request based on
+// which config is present, so no environment-specific wiring is needed at startup.
+builder.Services.AddHttpClient<ResendEmailService>();
+builder.Services.AddScoped<SmtpEmailService>();
+builder.Services.AddScoped<IEmailService>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    return string.IsNullOrWhiteSpace(config["Resend:ApiKey"])
+        ? sp.GetRequiredService<SmtpEmailService>()
+        : sp.GetRequiredService<ResendEmailService>();
+});
 builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IAiSuggestionService, AiSuggestionService>();
 builder.Services.AddScoped<IChunkingService, ChunkingService>();
